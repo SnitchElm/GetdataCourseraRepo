@@ -32,11 +32,13 @@ rm(test, train)
 # Extract mean and standard deviation columns
 index <- grep("mean", names(all_data))
 std_index <- grep("std", names(all_data))
-index <- c(index, std_index, 562, 563) # Add activity and subject column index
+act_index <- grep("activity", names(all_data))
+subj_index <- grep("subject", names(all_data))
+index <- c(index, std_index, act_index, subj_index)
 index <- index[order(index)]
 all_data <- all_data[, index]
 
-rm(index, std_index)
+rm(index, std_index, act_index, subj_index)
 
 activity_list <- read.table("./UCI HAR Dataset/activity_labels.txt")
 all_data$act_label <- activity_list[all_data$activity, "V2"]
